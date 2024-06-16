@@ -1,10 +1,13 @@
+# ESP-IDF 컴포넌트 등록
 idf_component_register(
   SRCS "Dummy.c"
   INCLUDE_DIRS "."
 )
 
+# Swift Path 검색
 execute_process(COMMAND xcrun -f swiftc OUTPUT_VARIABLE SWIFTC OUTPUT_STRIP_TRAILING_WHITESPACE)
 
+# Swift 코드 빌드를 위해 툴체인 사용
 add_custom_command(
   OUTPUT ${CMAKE_CURRENT_BINARY_DIR}/_swiftcode.o
   COMMAND
@@ -22,6 +25,7 @@ add_custom_command(
 )
 add_custom_target(main-swiftcode DEPENDS ${CMAKE_CURRENT_BINARY_DIR}/_swiftcode.o)
 
+# Swift 빌드 결과물 링크
 target_link_libraries(__idf_main
   ${CMAKE_CURRENT_BINARY_DIR}/_swiftcode.o
 )

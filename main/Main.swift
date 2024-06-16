@@ -4,14 +4,14 @@ enum LEDController {
   static var ledState: Bool = false
   
   static func initialize() {
-    gpio_set_direction(ledPin, GPIO_MODE_OUTPUT)
+    gpio_set_direction(ledPin, GPIO_MODE_OUTPUT)   // ESP-IDF GPIO set direction
     gpio_set_direction(switchPin, GPIO_MODE_INPUT)
 
     ledOff()
   }
   
   static func ledOn() {
-    gpio_set_level(ledPin, 1)
+    gpio_set_level(ledPin, 1) // ESP-IDF GPIO set output level
   }
   
   static func ledOff() {
@@ -33,7 +33,7 @@ enum LEDController {
 
 
   static func getSwitch() -> Bool {
-    return gpio_get_level(switchPin) == 0
+    return gpio_get_level(switchPin) == 0 // ESP-IDF GPIO get input level
   }
 
   static func waitUntilSwitchRelease() {
@@ -45,7 +45,7 @@ enum LEDController {
   static func sleep(milliseconds: Int) {
     let tickRateHz: UInt32 = 1000 / UInt32(configTICK_RATE_HZ)
     let blinkDelayMs: UInt32 = UInt32(milliseconds)
-    vTaskDelay(blinkDelayMs / tickRateHz)
+    vTaskDelay(blinkDelayMs / tickRateHz) // FreeRTOS Task API
   }
 }
 
