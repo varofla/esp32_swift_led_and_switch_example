@@ -1,0 +1,7 @@
+{
+  "idf.adapterTargetName": "esp32c6",
+  "idf.customExtraVars": {
+    "TOOLCHAINS": "swift"
+  },
+  "idf.flashType": "UART"
+}
